@@ -1,0 +1,9 @@
+Symbol range map extraction starting
+Processing 1 files
+startProcessing "com\xpgaming\xPPayDay\Main.java" md5: b9755a3cb7c2c928f3f8618ac61e0037
+    Compile Error! Pb(84) This static method of interface Task can only be accessed as Task.builder
+    Compile Error! Pb(645) Lambda expressions are allowed only at source level 1.8 or above
+    Compile Error! Pb(84) This static method of interface Task can only be accessed as Task.builder
+    Compile Error! Pb(645) Lambda expressions are allowed only at source level 1.8 or above
+endProcessing "com\xpgaming\xPPayDay\Main.java"
+

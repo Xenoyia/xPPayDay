@@ -1,0 +1,216 @@
+Symbol range map extraction starting
+Processing 1 files
+startProcessing "com\xpgaming\xPPayDay\Main.java" md5: b9755a3cb7c2c928f3f8618ac61e0037
+    Compile Error! Pb(84) This static method of interface Task can only be accessed as Task.builder
+    Compile Error! Pb(645) Lambda expressions are allowed only at source level 1.8 or above
+    Compile Error! Pb(84) This static method of interface Task can only be accessed as Task.builder
+    Compile Error! Pb(645) Lambda expressions are allowed only at source level 1.8 or above
+@|com\xpgaming\xPPayDay\Main.java|8|29|com.xpgaming.xPPayDay|package|com.xpgaming.xPPayDay|(file)
+Class Start: com.xpgaming.xPPayDay.Main
+   @|com\xpgaming\xPPayDay\Main.java|1566|1572|Plugin|class|org.spongepowered.api.plugin.Plugin
+   @|com\xpgaming\xPPayDay\Main.java|1573|1575|id|method|org.spongepowered.api.plugin.Plugin|id|()Ljava/lang/String;
+   @|com\xpgaming\xPPayDay\Main.java|1578|1582|Main|class|com.xpgaming.xPPayDay.Main
+   @|com\xpgaming\xPPayDay\Main.java|1583|1585|id|field|com.xpgaming.xPPayDay.Main|id
+   @|com\xpgaming\xPPayDay\Main.java|1587|1591|name|method|org.spongepowered.api.plugin.Plugin|name|()Ljava/lang/String;
+   @|com\xpgaming\xPPayDay\Main.java|1594|1598|Main|class|com.xpgaming.xPPayDay.Main
+   @|com\xpgaming\xPPayDay\Main.java|1599|1603|name|field|com.xpgaming.xPPayDay.Main|name
+   @|com\xpgaming\xPPayDay\Main.java|1605|1612|version|method|org.spongepowered.api.plugin.Plugin|version|()Ljava/lang/String;
+   @|com\xpgaming\xPPayDay\Main.java|1635|1639|Main|class|com.xpgaming.xPPayDay.Main
+   @|com\xpgaming\xPPayDay\Main.java|1666|1672|String|class|java.lang.String
+   @|com\xpgaming\xPPayDay\Main.java|1666|1672|String|class|java.lang.String
+   @|com\xpgaming\xPPayDay\Main.java|1673|1675|id|field|com.xpgaming.xPPayDay.Main|id|
+   @|com\xpgaming\xPPayDay\Main.java|1714|1720|String|class|java.lang.String
+   @|com\xpgaming\xPPayDay\Main.java|1714|1720|String|class|java.lang.String
+   @|com\xpgaming\xPPayDay\Main.java|1721|1725|name|field|com.xpgaming.xPPayDay.Main|name|
+   @|com\xpgaming\xPPayDay\Main.java|1768|1774|Logger|class|org.slf4j.Logger
+   @|com\xpgaming\xPPayDay\Main.java|1768|1774|Logger|class|org.slf4j.Logger
+   @|com\xpgaming\xPPayDay\Main.java|1775|1778|log|field|com.xpgaming.xPPayDay.Main|log|
+   @|com\xpgaming\xPPayDay\Main.java|1781|1794|LoggerFactory|class|org.slf4j.LoggerFactory
+   @|com\xpgaming\xPPayDay\Main.java|1795|1804|getLogger|method|org.slf4j.LoggerFactory|getLogger|(Ljava/lang/String;)Lorg/slf4j/Logger;
+   @|com\xpgaming\xPPayDay\Main.java|1805|1809|name|field|com.xpgaming.xPPayDay.Main|name
+   @|com\xpgaming\xPPayDay\Main.java|1824|1830|String|class|java.lang.String
+   @|com\xpgaming\xPPayDay\Main.java|1832|1839|Integer|class|java.lang.Integer
+   @|com\xpgaming\xPPayDay\Main.java|1816|1823|HashMap|class|java.util.HashMap
+   @|com\xpgaming\xPPayDay\Main.java|1816|1823|HashMap|class|java.util.HashMap
+   @|com\xpgaming\xPPayDay\Main.java|1824|1830|String|class|java.lang.String
+   @|com\xpgaming\xPPayDay\Main.java|1832|1839|Integer|class|java.lang.Integer
+   @|com\xpgaming\xPPayDay\Main.java|1841|1860|onlinePlayerCounter|field|com.xpgaming.xPPayDay.Main|onlinePlayerCounter|
+   @|com\xpgaming\xPPayDay\Main.java|1867|1874|HashMap|class|java.util.HashMap
+   @|com\xpgaming\xPPayDay\Main.java|1875|1881|String|class|java.lang.String
+   @|com\xpgaming\xPPayDay\Main.java|1883|1890|Integer|class|java.lang.Integer
+   @|com\xpgaming\xPPayDay\Main.java|1921|1925|UUID|class|java.util.UUID
+   @|com\xpgaming\xPPayDay\Main.java|1933|1940|Integer|class|java.lang.Integer
+   @|com\xpgaming\xPPayDay\Main.java|1942|1948|Double|class|java.lang.Double
+   @|com\xpgaming\xPPayDay\Main.java|1927|1932|Tuple|class|org.spongepowered.api.util.Tuple
+   @|com\xpgaming\xPPayDay\Main.java|1915|1920|Cache|class|com.google.common.cache.Cache
+   @|com\xpgaming\xPPayDay\Main.java|1915|1920|Cache|class|com.google.common.cache.Cache
+   @|com\xpgaming\xPPayDay\Main.java|1921|1925|UUID|class|java.util.UUID
+   @|com\xpgaming\xPPayDay\Main.java|1927|1932|Tuple|class|org.spongepowered.api.util.Tuple
+   @|com\xpgaming\xPPayDay\Main.java|1933|1940|Integer|class|java.lang.Integer
+   @|com\xpgaming\xPPayDay\Main.java|1942|1948|Double|class|java.lang.Double
+   @|com\xpgaming\xPPayDay\Main.java|1951|1954|map|field|com.xpgaming.xPPayDay.Main|map|
+   @|com\xpgaming\xPPayDay\Main.java|1969|1981|CacheBuilder|class|com.google.common.cache.CacheBuilder
+   @|com\xpgaming\xPPayDay\Main.java|1982|1992|newBuilder|method|com.google.common.cache.CacheBuilder|newBuilder|()Lcom/google/common/cache/CacheBuilder;
+   @|com\xpgaming\xPPayDay\Main.java|1995|2012|expireAfterAccess|method|com.google.common.cache.CacheBuilder|expireAfterAccess|(JLjava/util/concurrent/TimeUnit;)Lcom/google/common/cache/CacheBuilder;
+   @|com\xpgaming\xPPayDay\Main.java|2017|2025|TimeUnit|class|java.util.concurrent.TimeUnit
+   @|com\xpgaming\xPPayDay\Main.java|2026|2033|MINUTES|field|java.util.concurrent.TimeUnit|MINUTES
+   @|com\xpgaming\xPPayDay\Main.java|2035|2040|build|method|com.google.common.cache.CacheBuilder|build|()Lcom/google/common/cache/Cache;
+   @|com\xpgaming\xPPayDay\Main.java|2064|2078|EconomyService|class|org.spongepowered.api.service.economy.EconomyService
+   @|com\xpgaming\xPPayDay\Main.java|2064|2078|EconomyService|class|org.spongepowered.api.service.economy.EconomyService
+   @|com\xpgaming\xPPayDay\Main.java|2079|2093|economyService|field|com.xpgaming.xPPayDay.Main|economyService|
+   Method Start: onChangeServiceProvider(Lorg/spongepowered/api/event/service/ChangeServiceProviderEvent;)V
+      @|com\xpgaming\xPPayDay\Main.java|2177|2182|event|param|com.xpgaming.xPPayDay.Main|onChangeServiceProvider|(Lorg/spongepowered/api/event/service/ChangeServiceProviderEvent;)V|event|0
+      @|com\xpgaming\xPPayDay\Main.java|2101|2109|Listener|class|org.spongepowered.api.event.Listener
+      @|com\xpgaming\xPPayDay\Main.java|2126|2149|onChangeServiceProvider|method|com.xpgaming.xPPayDay.Main|onChangeServiceProvider|(Lorg/spongepowered/api/event/service/ChangeServiceProviderEvent;)V
+      @|com\xpgaming\xPPayDay\Main.java|2150|2176|ChangeServiceProviderEvent|class|org.spongepowered.api.event.service.ChangeServiceProviderEvent
+      @|com\xpgaming\xPPayDay\Main.java|2198|2203|event|param|com.xpgaming.xPPayDay.Main|onChangeServiceProvider|(Lorg/spongepowered/api/event/service/ChangeServiceProviderEvent;)V|event|0
+      @|com\xpgaming\xPPayDay\Main.java|2204|2214|getService|method|org.spongepowered.api.event.service.ChangeServiceProviderEvent|getService|()Ljava/lang/Class;
+      @|com\xpgaming\xPPayDay\Main.java|2217|2223|equals|method|java.lang.Object|equals|(Ljava/lang/Object;)Z
+      @|com\xpgaming\xPPayDay\Main.java|2224|2238|EconomyService|class|org.spongepowered.api.service.economy.EconomyService
+      @|com\xpgaming\xPPayDay\Main.java|2261|2275|economyService|field|com.xpgaming.xPPayDay.Main|economyService
+      @|com\xpgaming\xPPayDay\Main.java|2279|2293|EconomyService|class|org.spongepowered.api.service.economy.EconomyService
+      @|com\xpgaming\xPPayDay\Main.java|2295|2300|event|param|com.xpgaming.xPPayDay.Main|onChangeServiceProvider|(Lorg/spongepowered/api/event/service/ChangeServiceProviderEvent;)V|event|0
+      @|com\xpgaming\xPPayDay\Main.java|2301|2327|getNewProviderRegistration|method|org.spongepowered.api.event.service.ChangeServiceProviderEvent|getNewProviderRegistration|()Lorg/spongepowered/api/service/ProviderRegistration;
+      @|com\xpgaming\xPPayDay\Main.java|2330|2341|getProvider|method|org.spongepowered.api.service.ProviderRegistration|getProvider|()Ljava/lang/Object;
+   Method End: onChangeServiceProvider(Lorg/spongepowered/api/event/service/ChangeServiceProviderEvent;)V
+   Method Start: addMoney(Lorg/spongepowered/api/entity/living/player/Player;Ljava/math/BigDecimal;)V
+      @|com\xpgaming\xPPayDay\Main.java|2394|2395|p|param|com.xpgaming.xPPayDay.Main|addMoney|(Lorg/spongepowered/api/entity/living/player/Player;Ljava/math/BigDecimal;)V|p|0
+      @|com\xpgaming\xPPayDay\Main.java|2408|2414|amount|param|com.xpgaming.xPPayDay.Main|addMoney|(Lorg/spongepowered/api/entity/living/player/Player;Ljava/math/BigDecimal;)V|amount|1
+      @|com\xpgaming\xPPayDay\Main.java|2378|2386|addMoney|method|com.xpgaming.xPPayDay.Main|addMoney|(Lorg/spongepowered/api/entity/living/player/Player;Ljava/math/BigDecimal;)V
+      @|com\xpgaming\xPPayDay\Main.java|2387|2393|Player|class|org.spongepowered.api.entity.living.player.Player
+      @|com\xpgaming\xPPayDay\Main.java|2397|2407|BigDecimal|class|java.math.BigDecimal
+      @|com\xpgaming\xPPayDay\Main.java|2426|2434|Optional|class|java.util.Optional
+      @|com\xpgaming\xPPayDay\Main.java|2435|2448|UniqueAccount|class|org.spongepowered.api.service.economy.account.UniqueAccount
+      @|com\xpgaming\xPPayDay\Main.java|2457|2471|economyService|field|com.xpgaming.xPPayDay.Main|economyService
+      @|com\xpgaming\xPPayDay\Main.java|2472|2490|getOrCreateAccount|method|org.spongepowered.api.service.economy.EconomyService|getOrCreateAccount|(Ljava/util/UUID;)Ljava/util/Optional;
+      @|com\xpgaming\xPPayDay\Main.java|2491|2492|p|param|com.xpgaming.xPPayDay.Main|addMoney|(Lorg/spongepowered/api/entity/living/player/Player;Ljava/math/BigDecimal;)V|p|0
+      @|com\xpgaming\xPPayDay\Main.java|2493|2504|getUniqueId|method|org.spongepowered.api.util.Identifiable|getUniqueId|()Ljava/util/UUID;
+      @|com\xpgaming\xPPayDay\Main.java|2525|2534|isPresent|method|java.util.Optional|isPresent|()Z
+      @|com\xpgaming\xPPayDay\Main.java|2552|2565|UniqueAccount|class|org.spongepowered.api.service.economy.account.UniqueAccount
+      @|com\xpgaming\xPPayDay\Main.java|2581|2584|get|method|java.util.Optional|get|()Ljava/lang/Object;
+      @|com\xpgaming\xPPayDay\Main.java|2600|2617|TransactionResult|class|org.spongepowered.api.service.economy.transaction.TransactionResult
+      @|com\xpgaming\xPPayDay\Main.java|2635|2642|deposit|method|org.spongepowered.api.service.economy.account.Account|deposit|(Lorg/spongepowered/api/service/economy/Currency;Ljava/math/BigDecimal;Lorg/spongepowered/api/event/cause/Cause;)Lorg/spongepowered/api/service/economy/transaction/TransactionResult;
+      @|com\xpgaming\xPPayDay\Main.java|2643|2657|economyService|field|com.xpgaming.xPPayDay.Main|economyService
+      @|com\xpgaming\xPPayDay\Main.java|2658|2676|getDefaultCurrency|method|org.spongepowered.api.service.economy.EconomyService|getDefaultCurrency|()Lorg/spongepowered/api/service/economy/Currency;
+      @|com\xpgaming\xPPayDay\Main.java|2680|2686|amount|param|com.xpgaming.xPPayDay.Main|addMoney|(Lorg/spongepowered/api/entity/living/player/Player;Ljava/math/BigDecimal;)V|amount|1
+      @|com\xpgaming\xPPayDay\Main.java|2688|2693|Cause|class|org.spongepowered.api.event.cause.Cause
+      @|com\xpgaming\xPPayDay\Main.java|2694|2700|source|method|org.spongepowered.api.event.cause.Cause|source|(Ljava/lang/Object;)Lorg/spongepowered/api/event/cause/Cause$Builder;
+      @|com\xpgaming\xPPayDay\Main.java|2707|2712|build|method|org.spongepowered.api.event.cause.Cause.Builder|build|()Lorg/spongepowered/api/event/cause/Cause;
+      @|com\xpgaming\xPPayDay\Main.java|2742|2751|getResult|method|org.spongepowered.api.service.economy.transaction.TransactionResult|getResult|()Lorg/spongepowered/api/service/economy/transaction/ResultType;
+      @|com\xpgaming\xPPayDay\Main.java|2757|2767|ResultType|class|org.spongepowered.api.service.economy.transaction.ResultType
+      @|com\xpgaming\xPPayDay\Main.java|2768|2775|SUCCESS|field|org.spongepowered.api.service.economy.transaction.ResultType|SUCCESS
+      @|com\xpgaming\xPPayDay\Main.java|2796|2797|p|param|com.xpgaming.xPPayDay.Main|addMoney|(Lorg/spongepowered/api/entity/living/player/Player;Ljava/math/BigDecimal;)V|p|0
+      @|com\xpgaming\xPPayDay\Main.java|2798|2809|sendMessage|method|org.spongepowered.api.text.channel.MessageReceiver|sendMessage|(Lorg/spongepowered/api/text/Text;)V
+      @|com\xpgaming\xPPayDay\Main.java|2810|2814|Text|class|org.spongepowered.api.text.Text
+      @|com\xpgaming\xPPayDay\Main.java|2815|2817|of|method|org.spongepowered.api.text.Text|of|(Ljava/lang/String;)Lorg/spongepowered/api/text/LiteralText;
+   Method End: addMoney(Lorg/spongepowered/api/entity/living/player/Player;Ljava/math/BigDecimal;)V
+   Method Start: onGameInitialization(Lorg/spongepowered/api/event/game/state/GameInitializationEvent;)V
+      @|com\xpgaming\xPPayDay\Main.java|3034|3039|event|param|com.xpgaming.xPPayDay.Main|onGameInitialization|(Lorg/spongepowered/api/event/game/state/GameInitializationEvent;)V|event|0
+      @|com\xpgaming\xPPayDay\Main.java|2935|2943|Listener|class|org.spongepowered.api.event.Listener
+      @|com\xpgaming\xPPayDay\Main.java|2945|2964|beforeModifications|method|org.spongepowered.api.event.Listener|beforeModifications|()Z
+      @|com\xpgaming\xPPayDay\Main.java|2989|3009|onGameInitialization|method|com.xpgaming.xPPayDay.Main|onGameInitialization|(Lorg/spongepowered/api/event/game/state/GameInitializationEvent;)V
+      @|com\xpgaming\xPPayDay\Main.java|3010|3033|GameInitializationEvent|class|org.spongepowered.api.event.game.state.GameInitializationEvent
+      @|com\xpgaming\xPPayDay\Main.java|3051|3055|Task|class|org.spongepowered.api.scheduler.Task
+      @|com\xpgaming\xPPayDay\Main.java|3063|3067|Task|class|org.spongepowered.api.scheduler.Task
+      @|com\xpgaming\xPPayDay\Main.java|3068|3075|builder|method|org.spongepowered.api.scheduler.Task|builder|()Lorg/spongepowered/api/scheduler/Task$Builder;
+      ERROR SimpleName: execute null
+      ERROR SimpleName: Sponge null
+      ERROR SimpleName: getServer null
+      ERROR SimpleName: getOnlinePlayers null
+      ERROR SimpleName: isEmpty null
+      ERROR SimpleType: Collection null
+      ERROR SimpleType: Player null
+      ERROR SimpleName: Sponge null
+      ERROR SimpleName: getServer null
+      ERROR SimpleName: getOnlinePlayers null
+      ERROR SimpleType: Player null
+      ERROR SimpleName: playersOnline null
+      ERROR SimpleName: onlinePlayerCounter null
+      ERROR SimpleName: containsKey null
+      ERROR SimpleName: p null
+      ERROR SimpleName: getName null
+      ERROR SimpleName: onlinePlayerCounter null
+      ERROR SimpleName: get null
+      ERROR SimpleName: p null
+      ERROR SimpleName: getName null
+      ERROR SimpleName: i null
+      ERROR SimpleName: i null
+      ERROR SimpleName: onlinePlayerCounter null
+      ERROR SimpleName: remove null
+      ERROR SimpleName: p null
+      ERROR SimpleName: getName null
+      ERROR SimpleName: onlinePlayerCounter null
+      ERROR SimpleName: put null
+      ERROR SimpleName: p null
+      ERROR SimpleName: getName null
+      ERROR SimpleName: i null
+      ERROR SimpleName: onlinePlayerCounter null
+      ERROR SimpleName: put null
+      ERROR SimpleName: p null
+      ERROR SimpleName: getName null
+      ERROR SimpleName: interval null
+      @|com\xpgaming\xPPayDay\Main.java|3832|3840|TimeUnit|class|java.util.concurrent.TimeUnit
+      @|com\xpgaming\xPPayDay\Main.java|3841|3848|SECONDS|field|java.util.concurrent.TimeUnit|SECONDS
+      ERROR SimpleName: name null
+      ERROR SimpleName: submit null
+      @|com\xpgaming\xPPayDay\Main.java|3935|3939|Task|class|org.spongepowered.api.scheduler.Task
+      @|com\xpgaming\xPPayDay\Main.java|3948|3952|Task|class|org.spongepowered.api.scheduler.Task
+      @|com\xpgaming\xPPayDay\Main.java|3953|3960|builder|method|org.spongepowered.api.scheduler.Task|builder|()Lorg/spongepowered/api/scheduler/Task$Builder;
+      ERROR SimpleName: execute null
+      ERROR SimpleName: Sponge null
+      ERROR SimpleName: getServer null
+      ERROR SimpleName: getBroadcastChannel null
+      ERROR SimpleName: send null
+      ERROR SimpleName: Text null
+      ERROR SimpleName: of null
+      ERROR SimpleName: Sponge null
+      ERROR SimpleName: getServer null
+      ERROR SimpleName: getOnlinePlayers null
+      ERROR SimpleName: isEmpty null
+      ERROR SimpleType: String null
+      ERROR SimpleName: onlinePlayerCounter null
+      ERROR SimpleName: keySet null
+      ERROR SimpleType: Optional null
+      ERROR SimpleType: Player null
+      ERROR SimpleName: Sponge null
+      ERROR SimpleName: getServer null
+      ERROR SimpleName: getPlayer null
+      ERROR SimpleName: name null
+      ERROR SimpleName: p null
+      ERROR SimpleName: isPresent null
+      ERROR SimpleType: Player null
+      ERROR SimpleName: p null
+      ERROR SimpleName: get null
+      ERROR SimpleName: pl null
+      ERROR SimpleName: isOnline null
+      ERROR SimpleName: onlinePlayerCounter null
+      ERROR SimpleName: get null
+      ERROR SimpleName: name null
+      ERROR SimpleType: BigDecimal null
+      ERROR SimpleName: BigDecimal null
+      ERROR SimpleName: valueOf null
+      ERROR SimpleName: percentage null
+      ERROR SimpleName: setScale null
+      ERROR SimpleName: RoundingMode null
+      ERROR SimpleName: CEILING null
+      ERROR SimpleName: addMoney null
+      ERROR SimpleName: pl null
+      ERROR SimpleName: finalPaymentAmount null
+      ERROR SimpleName: pl null
+      ERROR SimpleName: sendMessage null
+      ERROR SimpleName: Text null
+      ERROR SimpleName: of null
+      ERROR SimpleName: finalPaymentAmount null
+      ERROR SimpleName: onlinePlayerCounter null
+      ERROR SimpleName: clear null
+      ERROR SimpleName: interval null
+      @|com\xpgaming\xPPayDay\Main.java|5088|5096|TimeUnit|class|java.util.concurrent.TimeUnit
+      @|com\xpgaming\xPPayDay\Main.java|5097|5102|HOURS|field|java.util.concurrent.TimeUnit|HOURS
+      ERROR SimpleName: name null
+      ERROR SimpleName: submit null
+      @|com\xpgaming\xPPayDay\Main.java|5188|5191|log|field|com.xpgaming.xPPayDay.Main|log
+      @|com\xpgaming\xPPayDay\Main.java|5192|5196|info|method|org.slf4j.Logger|info|(Ljava/lang/String;)V
+   Method End: onGameInitialization(Lorg/spongepowered/api/event/game/state/GameInitializationEvent;)V
+Class End  : com.xpgaming.xPPayDay.Main
+endProcessing "com\xpgaming\xPPayDay\Main.java"
+
