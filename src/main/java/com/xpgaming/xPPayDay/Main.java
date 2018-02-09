@@ -1,19 +1,11 @@
 package com.xpgaming.xPPayDay;
 import com.google.common.cache.Cache;
 import com.google.common.cache.CacheBuilder;
-import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.util.DamageSource;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.spongepowered.api.Sponge;
-import org.spongepowered.api.data.key.Keys;
 import org.spongepowered.api.entity.living.player.Player;
 import org.spongepowered.api.event.Listener;
-import org.spongepowered.api.event.cause.Cause;
-import org.spongepowered.api.event.entity.DestructEntityEvent;
-import org.spongepowered.api.event.entity.living.humanoid.player.RespawnPlayerEvent;
-import org.spongepowered.api.event.filter.Getter;
-import org.spongepowered.api.event.filter.cause.First;
 import org.spongepowered.api.event.game.state.GameInitializationEvent;
 import org.spongepowered.api.event.service.ChangeServiceProviderEvent;
 import org.spongepowered.api.plugin.Plugin;
@@ -27,14 +19,13 @@ import org.spongepowered.api.util.Tuple;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
-import java.text.DecimalFormat;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Optional;
 import java.util.UUID;
 import java.util.concurrent.TimeUnit;
 
-@Plugin(id = Main.id, name = Main.name, version = "0.1")
+@Plugin(id = Main.id, name = Main.name, version = "0.2")
 public class Main {
     public static final String id = "xppayday";
     public static final String name = "xP// PayDay";
@@ -58,7 +49,7 @@ public class Main {
         Optional<UniqueAccount> uOpt = economyService.getOrCreateAccount(p.getUniqueId());
         if(uOpt.isPresent()) {
             UniqueAccount account = uOpt.get();
-            TransactionResult result = account.deposit(economyService.getDefaultCurrency(), amount, Cause.source(this).build());
+            TransactionResult result = account.deposit(economyService.getDefaultCurrency(), amount, Sponge.getCauseStackManager().getCurrentCause());
             if (!(result.getResult() == ResultType.SUCCESS)) {
                 p.sendMessage(Text.of("\u00A7f[\u00A7cPayDay\u00A7f] \u00A7cUnable to give money, something broke!"));
             }
@@ -107,6 +98,6 @@ public class Main {
                 .interval(1, TimeUnit.HOURS)
                 .name("xP// PayDay Payment")
                 .submit(this);
-        log.info("Loaded v0.1!");
+        log.info("Loaded v0.2!");
     }
 }
