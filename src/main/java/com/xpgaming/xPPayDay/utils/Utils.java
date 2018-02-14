@@ -8,6 +8,12 @@ import java.util.Arrays;
 import java.util.List;
 
 public class Utils {
+    public static Boolean isNumberWithinPercentOfNumber(double firstN, double percent, double secondN) {
+        double decimalPercent = percent / 200.0;
+        double highRange = secondN * (1.0 + decimalPercent);
+        double lowRange = secondN * (1.0 - decimalPercent);
+        return lowRange <= firstN && firstN <= highRange;
+    }
     // THANKS XPAND
 
     // Takes a config String, and changes any ampersands to section symbols, which we can use internally.

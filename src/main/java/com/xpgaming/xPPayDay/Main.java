@@ -130,6 +130,17 @@ public class Main {
 
     @Listener
     public void onGamePreInitialization(GamePreInitializationEvent event) {
+        Config.getInstance().setup(configFile, configLoader);
+        Sponge.getCommandManager().register(Sponge.getPluginManager().getPlugin("xppayday").get().getInstance().get(), payDayCommands, "payday", "xppayday");
+    }
+    
+    public void consoleMsg(String str) {
+        getConsole().ifPresent(console ->
+                console.sendMessage(Text.of(str)));
+    }
+
+    @Listener
+    public void onGameInitialization(GameInitializationEvent event) {
         consoleMsg("§b       _____   ____   _____                 _             ");
         consoleMsg("§b      |  __ \\ / / /  / ____|               (_)            ");
         consoleMsg("§b __  _| |__) / / /  | |  __  __ _ _ __ ___  _ _ __   __ _ ");
@@ -142,17 +153,6 @@ public class Main {
         consoleMsg("§f[§6xP//§f] §ePayDay - Loaded v0.2!");
         consoleMsg("§f[§6xP//§f] §eBy Xenoyia with help from XpanD!");
 
-        Config.getInstance().setup(configFile, configLoader);
-        Sponge.getCommandManager().register(Sponge.getPluginManager().getPlugin("xppayday").get().getInstance().get(), payDayCommands, "payday", "xppayday");
-    }
-    
-    public void consoleMsg(String str) {
-        getConsole().ifPresent(console ->
-                console.sendMessage(Text.of(str)));
-    }
-
-    @Listener
-    public void onGameInitialization(GameInitializationEvent event) {
         Task task = Task.builder().execute(() -> {
             if (!Sponge.getServer().getOnlinePlayers().isEmpty()) {
                 Collection<Player> playersOnline = Sponge.getServer().getOnlinePlayers();
@@ -186,8 +186,7 @@ public class Main {
                     if (p.isPresent()) {
                         Player pl = p.get();
                         if (pl.isOnline()) {
-                            double percentage = ((double) onlinePlayerCounter.get(name) / (Config.getInstance().getConfig().getNode("payday", "general", "time-in-minutes").getInt() * 60));
-                            BigDecimal finalPaymentAmount = BigDecimal.valueOf(percentage * Config.getInstance().getConfig().getNode("payday", "general", "payout").getDouble()).setScale(2, RoundingMode.CEILING);
+                            BigDecimal finalPaymentAmount = getCurrentPayment(pl);
                             addMoney(pl, finalPaymentAmount);
                             pl.sendMessage(Text.of("\u00A7f[" + Utils.formatText(Config.getInstance().getConfig().getNode("payday", "lang", "prefix").getString()) + "] " + Utils.formatText(Config.getInstance().getConfig().getNode("payday", "lang", "local-payout-message").getString().replaceAll("%c%", finalPaymentAmount.toString()))));
                         }
@@ -204,6 +203,13 @@ public class Main {
 
     public BigDecimal getCurrentPayment(Player pl) {
                 double percentage = ((double)onlinePlayerCounter.get(pl.getName()) / (Config.getInstance().getConfig().getNode("payday", "general", "time-in-minutes").getInt() * 60));
+                if(percentage > 1) {
+                    percentage = 1;
+                }
+                if(Utils.isNumberWithinPercentOfNumber(percentage*100,10,100)) {
+                    consoleMsg(String.valueOf(percentage) + " is within 5% of 100");
+                    percentage = 1;
+                }
                 BigDecimal finalPaymentAmount = BigDecimal.valueOf(percentage * Config.getInstance().getConfig().getNode("payday", "general", "payout").getDouble()).setScale(2, RoundingMode.CEILING);
                 return finalPaymentAmount;
             }
