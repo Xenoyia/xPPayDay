@@ -44,8 +44,7 @@ import java.util.concurrent.TimeUnit;
 
 @Plugin(id = Main.id, name = Main.name, version = "0.2")
 public class Main {
-    private static Main instance = new Main();
-
+    private static Main instance = null;
     public static Main getInstance() {
         return instance;
     }
@@ -106,7 +105,7 @@ public class Main {
     CommandSpec payDayCommands = CommandSpec.builder()
             .permission("xppayday.check")
             .description(Text.of("Base command!"))
-            .executor(new Reload())
+            .executor(new BaseCommand())
             .child(reload, "reload", "r", "rel")
             .build();
 
@@ -124,8 +123,13 @@ public class Main {
 
 
     @Listener
+    public void onConstructionEvent(GameConstructionEvent event) {
+        Main.instance = this;
+        //DO NOT DO ANYTHING HERE FOR IT WILL BRING DESTRUCTION AND DEATH;
+    }
+
+    @Listener
     public void onGamePreInitialization(GamePreInitializationEvent event) {
-        consoleMsg(String.valueOf(this.hashCode()));
         consoleMsg("§b       _____   ____   _____                 _             ");
         consoleMsg("§b      |  __ \\ / / /  / ____|               (_)            ");
         consoleMsg("§b __  _| |__) / / /  | |  __  __ _ _ __ ___  _ _ __   __ _ ");
@@ -150,7 +154,6 @@ public class Main {
     @Listener
     public void onGameInitialization(GameInitializationEvent event) {
         Task task = Task.builder().execute(() -> {
-            consoleMsg("task1: "+onlinePlayerCounter.toString() +" | "+onlinePlayerCounter.hashCode()+" | "+System.identityHashCode(onlinePlayerCounter));
             if (!Sponge.getServer().getOnlinePlayers().isEmpty()) {
                 Collection<Player> playersOnline = Sponge.getServer().getOnlinePlayers();
                 for (Player p : playersOnline) {
@@ -176,18 +179,13 @@ public class Main {
         Sponge.getScheduler().getTasksByName("xP// PayDay Payment").forEach(t -> t.cancel());
 
         Task task2 = Task.builder().execute(() -> {
-            consoleMsg("task2: "+onlinePlayerCounter.toString() +" | "+onlinePlayerCounter.hashCode()+" | "+System.identityHashCode(onlinePlayerCounter));
-            consoleMsg("Task beginning");
             if(Config.getInstance().getConfig().getNode("payday", "general", "global-msg").getBoolean()) Sponge.getServer().getBroadcastChannel().send(Text.of("\u00A7f[" + Utils.formatText(Config.getInstance().getConfig().getNode("payday", "lang", "prefix").getString()) + "] " + Utils.formatText(Config.getInstance().getConfig().getNode("payday", "lang", "global-payout-message").getString())));
             if (!Sponge.getServer().getOnlinePlayers().isEmpty()) {
-                consoleMsg("Players online");
                 for (String name : onlinePlayerCounter.keySet()) {
                     Optional<Player> p = Sponge.getServer().getPlayer(name);
                     if (p.isPresent()) {
-                        consoleMsg("Player present");
                         Player pl = p.get();
                         if (pl.isOnline()) {
-                            consoleMsg("Player online");
                             double percentage = ((double) onlinePlayerCounter.get(name) / (Config.getInstance().getConfig().getNode("payday", "general", "time-in-minutes").getInt() * 60));
                             BigDecimal finalPaymentAmount = BigDecimal.valueOf(percentage * Config.getInstance().getConfig().getNode("payday", "general", "payout").getDouble()).setScale(2, RoundingMode.CEILING);
                             addMoney(pl, finalPaymentAmount);
@@ -195,7 +193,7 @@ public class Main {
                         }
                     }
                 }
-                //onlinePlayerCounter.clear();
+                onlinePlayerCounter.clear();
             }
         })
                 //Default payout times
@@ -203,4 +201,10 @@ public class Main {
                 .name("xP// PayDay Payment")
                 .submit(Sponge.getPluginManager().getPlugin("xppayday").get().getInstance().get());
     }
+
+    public BigDecimal getCurrentPayment(Player pl) {
+                double percentage = ((double)onlinePlayerCounter.get(pl.getName()) / (Config.getInstance().getConfig().getNode("payday", "general", "time-in-minutes").getInt() * 60));
+                BigDecimal finalPaymentAmount = BigDecimal.valueOf(percentage * Config.getInstance().getConfig().getNode("payday", "general", "payout").getDouble()).setScale(2, RoundingMode.CEILING);
+                return finalPaymentAmount;
+            }
 }

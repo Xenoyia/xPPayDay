@@ -45,6 +45,8 @@ public class Config {
             payday.getNode("lang","global-payout-message").setValue("&eIt's pay day! Time to make it rain!");
             payday.getNode("lang","local-payout-message").setComment("%c% is translated to the amount of economy. If you use dollars, you can do $%c%.");
             payday.getNode("lang","local-payout-message").setValue("&eYou earned %c% coins, thanks for playing!");
+            payday.getNode("lang","check-payout-message").setComment("%c% works here as well. This displays when you use the base /payday command.");
+            payday.getNode("lang","check-payout-message").setValue("&eYou have earned %c% coins so far!");
             payday.getNode("lang","reload-message").setValue("&e&lConfig reloaded!");
             configSave();
         } catch (IOException e) {

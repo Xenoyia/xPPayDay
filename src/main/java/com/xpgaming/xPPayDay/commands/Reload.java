@@ -29,9 +29,6 @@ public class Reload implements CommandExecutor {
     }
 
     public CommandResult execute(CommandSource src, CommandContext args) throws CommandException {
-        Main main = Main.getInstance();
-        consoleMsg(String.valueOf(main.hashCode()));
-        main.reloadTask();
         Config.getInstance().configLoad();
         Main.getInstance().reloadTask();
         src.sendMessage(Text.of("\u00A7f["+Utils.formatText(Config.getInstance().getConfig().getNode("payday","lang","prefix").getString())+"] "+Utils.formatText(Config.getInstance().getConfig().getNode("payday","lang","reload-message").getString())));
