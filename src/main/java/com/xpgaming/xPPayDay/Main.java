@@ -1,12 +1,18 @@
 package com.xpgaming.xPPayDay;
 import com.google.common.cache.Cache;
 import com.google.common.cache.CacheBuilder;
+import com.xpgaming.xPPayDay.commands.BaseCommand;
+import com.xpgaming.xPPayDay.commands.Reload;
+import com.xpgaming.xPPayDay.utils.Config;
+import com.xpgaming.xPPayDay.utils.Utils;
 import ninja.leaping.configurate.commented.CommentedConfigurationNode;
 import ninja.leaping.configurate.hocon.HoconConfigurationLoader;
 import ninja.leaping.configurate.loader.ConfigurationLoader;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.spongepowered.api.Sponge;
+import org.spongepowered.api.command.source.ConsoleSource;
+import org.spongepowered.api.command.spec.CommandSpec;
 import org.spongepowered.api.entity.living.player.Player;
 import org.spongepowered.api.event.Listener;
 import org.spongepowered.api.event.game.state.GameConstructionEvent;
@@ -23,6 +29,8 @@ import org.spongepowered.api.service.economy.transaction.TransactionResult;
 import org.spongepowered.api.text.Text;
 import org.spongepowered.api.util.Tuple;
 
+import javax.inject.Inject;
+import java.io.File;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.nio.file.FileSystems;
@@ -36,11 +44,14 @@ import java.util.concurrent.TimeUnit;
 
 @Plugin(id = Main.id, name = Main.name, version = "0.2")
 public class Main {
+    private static Main instance = new Main();
+
+    public static Main getInstance() {
+        return instance;
+    }
+
     public static final String id = "xppayday";
     public static final String name = "xP// PayDay";
-
-    public static Double payout;
-    public static Integer timeInMins;
 
     private static String separator = FileSystems.getDefault().getSeparator();
     public static String primaryPath = "config" + separator;
@@ -50,8 +61,18 @@ public class Main {
     public static ConfigurationLoader<CommentedConfigurationNode> primaryConfigLoader =
             HoconConfigurationLoader.builder().setPath(configPath).build();
 
-    private static final Logger log = LoggerFactory.getLogger(name);
-    HashMap<String, Integer> onlinePlayerCounter = new HashMap<String, Integer>();
+    private Logger logger;
+
+    @Inject
+    public void setLogger(Logger logger) {
+        this.logger = logger;
+    }
+
+    public Logger getLogger() {
+        return logger;
+    }
+
+    public HashMap<String, Integer> onlinePlayerCounter = new HashMap<>();
 
     private final Cache<UUID, Tuple<Integer, Double>> map =
             CacheBuilder.newBuilder().expireAfterAccess(25, TimeUnit.MINUTES).build();
@@ -67,85 +88,119 @@ public class Main {
 
     public void addMoney(Player p, BigDecimal amount) {
         Optional<UniqueAccount> uOpt = economyService.getOrCreateAccount(p.getUniqueId());
-        if(uOpt.isPresent()) {
+        if (uOpt.isPresent()) {
             UniqueAccount account = uOpt.get();
             TransactionResult result = account.deposit(economyService.getDefaultCurrency(), amount, Sponge.getCauseStackManager().getCurrentCause());
             if (!(result.getResult() == ResultType.SUCCESS)) {
-                p.sendMessage(Text.of("\u00A7f[\u00A7cPayDay\u00A7f] \u00A7cUnable to give money, something broke!"));
+                p.sendMessage(Text.of("\u00A7f[" + Utils.formatText(Config.getInstance().getConfig().getNode("payday", "lang", "prefix").getString()).toString() + "] \u00A7cUnable to give money, something broke!"));
             }
         }
     }
 
-    @Listener (beforeModifications = true)
+    CommandSpec reload = CommandSpec.builder()
+            .permission("xppayday.reload")
+            .description(Text.of("Reload the config!"))
+            .executor(new Reload())
+            .build();
+
+    CommandSpec payDayCommands = CommandSpec.builder()
+            .permission("xppayday.check")
+            .description(Text.of("Base command!"))
+            .executor(new Reload())
+            .child(reload, "reload", "r", "rel")
+            .build();
+
+    String path = "config" + File.separator + "xPPayDay";
+
+    File configFile = new File(path, "xPPayDay.conf");
+    ConfigurationLoader<CommentedConfigurationNode> configLoader = HoconConfigurationLoader.builder().setFile(configFile).build();
+
+    private static Optional<ConsoleSource> getConsole() {
+        if (Sponge.isServerAvailable())
+            return Optional.of(Sponge.getServer().getConsole());
+        else
+            return Optional.empty();
+    }
+
+
+    @Listener
+    public void onGamePreInitialization(GamePreInitializationEvent event) {
+        consoleMsg(String.valueOf(this.hashCode()));
+        consoleMsg("§b       _____   ____   _____                 _             ");
+        consoleMsg("§b      |  __ \\ / / /  / ____|               (_)            ");
+        consoleMsg("§b __  _| |__) / / /  | |  __  __ _ _ __ ___  _ _ __   __ _ ");
+        consoleMsg("§b \\ \\/ |  ___/ / /   | | |_ |/ _` | '_ ` _ \\| | '_ \\ / _` |");
+        consoleMsg("§b  >  <| |  / / /    | |__| | (_| | | | | | | | | | | (_| |");
+        consoleMsg("§b /_/\\_|_| /_/_/      \\_____|\\__,_|_| |_| |_|_|_| |_|\\__, |");
+        consoleMsg("§b                                                     __/ |");
+        consoleMsg("§b                                                    |___/ ");
+        consoleMsg("");
+        consoleMsg("§f[§6xP//§f] §ePayDay - Loaded v0.2!");
+        consoleMsg("§f[§6xP//§f] §eBy Xenoyia with help from XpanD!");
+
+        Config.getInstance().setup(configFile, configLoader);
+        Sponge.getCommandManager().register(Sponge.getPluginManager().getPlugin("xppayday").get().getInstance().get(), payDayCommands, "payday", "xppayday");
+    }
+    
+    public void consoleMsg(String str) {
+        getConsole().ifPresent(console ->
+                console.sendMessage(Text.of(str)));
+    }
+
+    @Listener
     public void onGameInitialization(GameInitializationEvent event) {
         Task task = Task.builder().execute(() -> {
-            if(!Sponge.getServer().getOnlinePlayers().isEmpty()) {
+            consoleMsg("task1: "+onlinePlayerCounter.toString() +" | "+onlinePlayerCounter.hashCode()+" | "+System.identityHashCode(onlinePlayerCounter));
+            if (!Sponge.getServer().getOnlinePlayers().isEmpty()) {
                 Collection<Player> playersOnline = Sponge.getServer().getOnlinePlayers();
-                for(Player p : playersOnline) {
-                        if (onlinePlayerCounter.containsKey(p.getName())) {
-                            int i = onlinePlayerCounter.get(p.getName());
-                            i = i+1;
-                            onlinePlayerCounter.remove(p.getName());
-                            onlinePlayerCounter.put(p.getName(), i);
-                        } else {
-                            onlinePlayerCounter.put(p.getName(), 1);
-                        }
+                for (Player p : playersOnline) {
+                    if (onlinePlayerCounter.containsKey(p.getName())) {
+                        int i = onlinePlayerCounter.get(p.getName());
+                        i = i + 1;
+                        onlinePlayerCounter.remove(p.getName());
+                        onlinePlayerCounter.put(p.getName(), i);
+                    } else {
+                        onlinePlayerCounter.put(p.getName(), 1);
+                    }
                 }
             }
-                })
+        })
                 .interval(1, TimeUnit.SECONDS)
                 .name("xP// PayDay Counter")
-                .submit(this);
+                .submit(Sponge.getPluginManager().getPlugin("xppayday").get().getInstance().get());
+
         reloadTask();
     }
 
-    public static void reloadTask() {
-        PluginContainer payDayPlugin = Sponge.getPluginManager().getPlugin("xppayday").orElse(null);
-        Main main = new Main();
+    public void reloadTask() {
+        Sponge.getScheduler().getTasksByName("xP// PayDay Payment").forEach(t -> t.cancel());
+
         Task task2 = Task.builder().execute(() -> {
-            Sponge.getServer().getBroadcastChannel().send(Text.of("\u00A7f[\u00A7ePayDay\u00A7f] \u00A7eIt's pay day! Time to make it rain!"));
-            if(!Sponge.getServer().getOnlinePlayers().isEmpty()) {
-                for(String name : main.onlinePlayerCounter.keySet()) {
+            consoleMsg("task2: "+onlinePlayerCounter.toString() +" | "+onlinePlayerCounter.hashCode()+" | "+System.identityHashCode(onlinePlayerCounter));
+            consoleMsg("Task beginning");
+            if(Config.getInstance().getConfig().getNode("payday", "general", "global-msg").getBoolean()) Sponge.getServer().getBroadcastChannel().send(Text.of("\u00A7f[" + Utils.formatText(Config.getInstance().getConfig().getNode("payday", "lang", "prefix").getString()) + "] " + Utils.formatText(Config.getInstance().getConfig().getNode("payday", "lang", "global-payout-message").getString())));
+            if (!Sponge.getServer().getOnlinePlayers().isEmpty()) {
+                consoleMsg("Players online");
+                for (String name : onlinePlayerCounter.keySet()) {
                     Optional<Player> p = Sponge.getServer().getPlayer(name);
-                    if(p.isPresent()) {
+                    if (p.isPresent()) {
+                        consoleMsg("Player present");
                         Player pl = p.get();
                         if (pl.isOnline()) {
-                            double percentage = ((double)main.onlinePlayerCounter.get(name) / (timeInMins * 60));
-                            BigDecimal finalPaymentAmount = BigDecimal.valueOf(percentage * payout).setScale(2, RoundingMode.CEILING);
-                            main.addMoney(pl, finalPaymentAmount);
-                            pl.sendMessage(Text.of("\u00A7f[\u00A7ePayDay\u00A7f] \u00A7eYou earned \u00A76" + finalPaymentAmount + " coins\u00A7e, thanks for playing!"));
+                            consoleMsg("Player online");
+                            double percentage = ((double) onlinePlayerCounter.get(name) / (Config.getInstance().getConfig().getNode("payday", "general", "time-in-minutes").getInt() * 60));
+                            BigDecimal finalPaymentAmount = BigDecimal.valueOf(percentage * Config.getInstance().getConfig().getNode("payday", "general", "payout").getDouble()).setScale(2, RoundingMode.CEILING);
+                            addMoney(pl, finalPaymentAmount);
+                            pl.sendMessage(Text.of("\u00A7f[" + Utils.formatText(Config.getInstance().getConfig().getNode("payday", "lang", "prefix").getString()) + "] " + Utils.formatText(Config.getInstance().getConfig().getNode("payday", "lang", "local-payout-message").getString().replaceAll("%c%", finalPaymentAmount.toString()))));
                         }
                     }
                 }
-                main.onlinePlayerCounter.clear();
+                //onlinePlayerCounter.clear();
             }
         })
                 //Default payout times
-                .interval(timeInMins, TimeUnit.MINUTES)
+                .interval(Config.getInstance().getConfig().getNode("payday", "general", "time-in-minutes").getInt(), TimeUnit.MINUTES)
                 .name("xP// PayDay Payment")
-                .submit(payDayPlugin);
-    }
-
-    public static BigDecimal getCurrentPayment(Player pl) {
-        Main main = new Main();
-        double percentage = ((double)main.onlinePlayerCounter.get(pl.getName()) / (timeInMins * 60));
-        BigDecimal finalPaymentAmount = BigDecimal.valueOf(percentage * payout).setScale(2, RoundingMode.CEILING);
-        return finalPaymentAmount;
-    }
-
-    @Listener
-    public void onPreInitEvent(GamePreInitializationEvent event){
-        log.info("xP// Pay Day - Loading config directory..");
-        ConfigIO.checkConfigDir();
-        log.info("xP// Pay Day - Loading configs..");
-        ConfigIO.loadAllCommandConfigs();
-        log.info("xP// Pay Day - Registering commands..");
-        ConfigIO.registerCommands();
-        log.info("xP// Pay Day - Loaded v0.2!");
-    }
-
-    @Listener
-    public void onConstructionEvent(GameConstructionEvent event){
-        log.info("xP// Pay Day - Hello, can you hear me?");
+                .submit(Sponge.getPluginManager().getPlugin("xppayday").get().getInstance().get());
     }
 }
