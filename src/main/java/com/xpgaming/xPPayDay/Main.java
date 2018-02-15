@@ -97,13 +97,13 @@ public class Main {
     }
 
     CommandSpec reload = CommandSpec.builder()
-            .permission("xppayday.reload")
+            .permission("xpgaming.payday.reload")
             .description(Text.of("Reload the config!"))
             .executor(new Reload())
             .build();
 
     CommandSpec payDayCommands = CommandSpec.builder()
-            .permission("xppayday.check")
+            .permission("xpgaming.payday.check")
             .description(Text.of("Base command!"))
             .executor(new BaseCommand())
             .child(reload, "reload", "r", "rel")
@@ -207,7 +207,6 @@ public class Main {
                     percentage = 1;
                 }
                 if(Utils.isNumberWithinPercentOfNumber(percentage*100,10,100)) {
-                    consoleMsg(String.valueOf(percentage) + " is within 5% of 100");
                     percentage = 1;
                 }
                 BigDecimal finalPaymentAmount = BigDecimal.valueOf(percentage * Config.getInstance().getConfig().getNode("payday", "general", "payout").getDouble()).setScale(2, RoundingMode.CEILING);
