@@ -10,8 +10,9 @@ buildscript {
 
 apply plugin: 'net.minecraftforge.gradle.forge'
 
-group = 'com.xpgaming'
-version = '0.2'
+version = "0.2-MC${project.minecraftVersion}-F${project.forgeBuild}-S${project.spongeAPIVersion.split("-")[0]}"
+group = modGroup
+archivesBaseName = modBaseName
 description = 'Automated economy payments!'
 
 repositories {
